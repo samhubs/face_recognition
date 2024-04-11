@@ -5,7 +5,10 @@ This repository covers the following approaches:
 1. Data version control (DVC)
 2. Poetry
 3. Pytorch
-4. FastAPI
+4. VSCode with LambdaLabs extension
+5. FastAPI
+6. Github Actions
+7. Dotenv
 
 ## Poetry Setup
 1. Install poetry
@@ -27,3 +30,41 @@ The prompts will guide you to provide relevant information as below
 poetry install
 ```
 If you want to use poetry for managing dependies alone, you can set `package-mode = false` in `pyproject.toml` file under `[tool.poetry]`.
+
+## DVC Setup
+
+## Github Actions
+
+1. Create a `.github/workflows` directory in the root of the repository.
+
+2. Create a `ci.yml` file in the `.github/workflows` directory and add the following code:
+```yml
+name: Face Recognition CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    
+        steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+            python-version: 3.8
+        - name: Install dependencies
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        - name: Run tests
+        run: |
+            pytest
+    ```
+
