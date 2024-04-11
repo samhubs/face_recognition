@@ -59,7 +59,12 @@ provide a custom name as `<remote name>`. To find out `remote url`:
     dvc remote modify <remote name> gdrive_use_service_account true
     ```
 
-5. Check if authentication passes by running a status command: 
+5. Add a folder to the dvc
+```sh
+dvc add <folder path>
+```
+
+6. Check if authentication passes by running a status command: 
     ```sh
     dvc status -c
     
