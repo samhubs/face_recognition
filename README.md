@@ -72,7 +72,7 @@ dvc add <folder path>
     ```
   if you face an issue, please use `Troubleshooting tips` below.
 
-## 2. Running DVC with CI (Github actions)
+## CI setup - locally with `act` and on `Github` using actions
 There are two ways in which CI runs are set up in this repository: 1) locally using `act`, and 2) on `GitHub`. Both the ways employ Github actions ([see here](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python)). Let's start with setting up CI runs using [act](https://github.com/nektos/act).
 
 a) Using `act`
@@ -101,7 +101,7 @@ GDRIVE_CREDENTIALS_DATA="$GDRIVE_CREDENTIALS_DATA"
 ```  
 
 ## Troubleshooting
-- Local runs:
+- DVC setup:
     - If authentication fails while using any of the `dvc` commands:
         - ensure `GDRIVE_CREDENTIALS_DATA` is set up as a local environment variable.  
           ```sh
@@ -109,6 +109,11 @@ GDRIVE_CREDENTIALS_DATA="$GDRIVE_CREDENTIALS_DATA"
           ```
         - check if `Google Drive API` is enabled in the service account on GCP 
         - Clear cache and retry, typically, cache is found at: `$CACHE_HOME/pydrive2fs/{gdrive_client_id}/default.json`
+
+- If `dvc pull` fails with `dvc pull: error: failed to pull data from the cloud - 'gdrive'`, check if the `gdrive` remote is set up correctly.
+
+- If you are trying to pull data from a remote location but did not add the folder to dvc, you will get an error like `dvc pull: error: data 'data' not found in cache or in remote storage 'gdrive'`.
+
 - CI with [act](https://github.com/nektos/act):
     
     - secrets are to be supplied with `-s` option

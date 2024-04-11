@@ -22,6 +22,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Pull DVC managed files
+        run: |
+            env
+            echo "Configuring DVC remote"
+            dvc remote modify gdrive gdrive_use_service_account true
+            echo "${GDRIVE_CREDENTIALS_DATA}" > gdrive_credentials.json
+            dvc remote modify gdrive gdrive_service_account_json_file_path \
+                        gdrive_credentials.json
+            echo "Pulling DVC managed files"
+            dvc pull -v
+            
       - name: Run tests
         run: |
           pytest

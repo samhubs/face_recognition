@@ -1,3 +1,6 @@
 torch
 numpy
 matplotlib
+pytest
+dvc [gdrive]
+
