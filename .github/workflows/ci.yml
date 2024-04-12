@@ -1,5 +1,8 @@
 name: Face Recognition CI
 
+env:
+  GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+  
 on:
   push:
     branches:
